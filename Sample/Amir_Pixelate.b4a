@@ -1,0 +1,76 @@
+﻿Build1=Default,com.aghajari.pixelate.sample
+File1=eight_col_michael.jpg
+FileGroup1=Default Group
+Group=Default Group
+IconFile=
+Library1=core
+Library2=amir_pixelate
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=1
+NumberOfLibraries=2
+NumberOfModules=1
+Version=8.3
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Amir_Pixelate
+	#VersionCode: 1
+	#VersionName: 1.00
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+
+End Sub
+
+Sub Globals
+	Dim Img As ImageView
+	Dim Img2 As ImageView
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Img.Initialize("")
+	Activity.AddView(Img,0,0,100%x,50%y)
+	Img.Bitmap=LoadBitmap(File.DirAssets,"eight_col_michael.jpg")
+	Img.Gravity=Gravity.FILL
+	
+	
+	Img2.Initialize("")
+	Activity.AddView(Img2,0,50%y,100%x,50%y)
+	Img2.Bitmap=LoadBitmap(File.DirAssets,"eight_col_michael.jpg")
+	Img2.Gravity=Gravity.FILL
+	
+	Dim Seekbar As SeekBar
+	Seekbar.Initialize("Seekbar")
+	Activity.AddView(Seekbar,0,50%y-8dip,100%x,16dip)
+	Seekbar.Max=250
+	Seekbar.Value=25
+	Seekbar.Color=Colors.ARGB(180,0,0,0)
+End Sub
+
+Private Sub Seekbar_ValueChanged (Value As Int, UserChanged As Boolean)
+	Dim Pixelate As Amir_Pixelate
+	Pixelate.Initialize("Amir",Img.Bitmap)
+	Pixelate.SetDensity(Value)
+	Pixelate.SetListener
+	Pixelate.Make
+End Sub
+
+Private Sub Amir_onPixelated (bitmap As Object,mDensity As Int)
+	Img2.Bitmap=bitmap
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
