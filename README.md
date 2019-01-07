@@ -7,7 +7,7 @@ Simple B4A library to pixelate images or certain areas of an image.
 
 Pixelate library for B4A
 
-## How to use iAmir_ViewAnimator?
+## How to use Amir_Pixelate?
 
 ```
 	Dim Pixelate As Amir_Pixelate
